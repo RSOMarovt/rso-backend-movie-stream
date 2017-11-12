@@ -1,0 +1,18 @@
+sudo: required
+language: java
+env:
+  global:
+  - COMMIT=${TRAVIS_COMMIT::8}
+  - secure: TTsoK230rV6VOw+kU6YYyNCaszJgD7Q5nfug283rIB4jjEzdSwgcuSKb6GUgA0N8IumyEajqND+YDMZp+818Odh0/fL9Blok4kdBGElIpYKokGE7WDQ6YswR0PsGG1ldDcRKV224rkif9WHJ+O8x8cbqroJu2Wyih0nUK3oWuukQEx0eUzaVRUqkeI6OgAVrWY21x7uyt2Buz/CYGXzNJYZVMC3lGMLLxufKb8yr6H7c7LZr1ZBm9ib65dgvyZdvj5NSUv/eTqexefg4b3zbrq59E7R6GCp8s2h8O1IEiOoKv1WRfgh3JCwFgSZge58lXAOuDiIkiwTsMVU7DMOJ+udrwHvkH4tAyqWA4hOIk7vqzMXG6jYCFgQ4QDuPVMNRduEmXzcAMil3l+8eGPjzd4JF4EHGoze2fwSJZWmHUowMSRP1mCP/eoN8ePrZ1wR7wCRwwqyiGhydLTBtLtnPpCM4RPaj8ls+AUBONtwbHNl516uiNu+qkOp4V0+jruMwci7CeBMVq36FcV58VoRJfO96dy6/8qj3IPbavZ/oR+AQ+deMsrb2zLDuP//bwmHmr5cx2Fk07J4H8G71m0eUVgQwi7bz2Mg770QTq8HN0Z4S7JzI04QqMY+EVERjmVguDrAwgshB8cwhW9b8CQmbIHpxoe0K3/YID6brixOIEvo=
+  - secure: o1TC4G8HkR0sVHQjnf5ZNMP7qWlprEKXFk9Y5VBY4m8glsINbdIwBxnr+5eR9yLgqAuBx+qiI7Q2f/4PcO3sztKOW9wsC4twOQ6emgBzHobEiOPuklURNhXg8ZiGdH7JMvcIXUglKrfwaObOMs0TmgAbIHd9am5W9sdRQ22g0NrSUmIL8C6vdwyexU2q0c3O5jh4/ls5G1k3FcViN2YxRjNIoeHrY3J1Ot5WNWy/pcs4CZ0bu9uf3pr9NRyBtTkCRPh0iOatTssCm94Xl4Rf9Sdhe1arQqPa+c90sidxeEUmvyEi4oOHMckVlusiQp9ol/XRGV/oC17OmtUTwRh0jB2qMOL6FR2D8nDP2Gn231lQMCHDhC6BmLYMX+Z50lYkOyg27rl9rqqUjWra/mb0PNjKr6FUpReNm2Tyq1mxP2KCZvD5mBZd3prLB/JvVjlYNQGCAX3EPZzCHaUymHywxGL/1JXKp0eWhBNT9EUYY0ocVbzdUdESXrAw5BUbpVg/BLTCyZcHmPP4l1Q8Sf69rd1KjHCxZ0N4b0osAtftOz8P+JkgdWlfK4WxueqfpTiUOnX9UBr9PGuAt+hq2WxYpQ1s3KMF7iy5TVZ9WrrQQ7PiLH6MFU23qMzLBplEYih+G8s2gd3FwfPEVFoiOgbmWuvHaGcw7obNlHP2R7+Nqb8=
+services:
+- docker
+after_success:
+- docker login -u $DOCKER_USERNAME -p $DOCKER_PASS
+- export REPO=banomaster/rso-backend-movie-stream
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH
+  ; fi`
+- docker build -f Dockerfile -t $REPO:$COMMIT .
+- docker tag $REPO:$COMMIT $REPO:$TAG
+- docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER
+- docker push $REPO
