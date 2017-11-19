@@ -1,0 +1,25 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: stream-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: stream
+    spec:
+      containers:
+      - image: banomaster/rso-backend-movie-stream:latest
+        name: stream
+        env:
+          - name: KUMULUZEE_SERVER_BASEURL
+            value: http://NODE-IP:SERVICE-NODEPORT
+          - name: KUMULUZEE_DISCOVERY_CLUSTER
+            value: rso-umarovt
+          - name: KUMULUZEE_DISCOVERY_ETCD_HOSTS
+            value: http://etcd:2379
+        ports:
+        - containerPort: 8080
+          name: server
+          protocol: TCP

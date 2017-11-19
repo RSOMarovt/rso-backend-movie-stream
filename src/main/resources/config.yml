@@ -1,0 +1,10 @@
+kumuluzee:
+  name: stream-service
+  env:
+    name: prod
+  version: 1.0.0
+  discovery:
+    etcd:
+      hosts: http://localhost:2379
+    ttl: 20
+    ping-interval: 15
