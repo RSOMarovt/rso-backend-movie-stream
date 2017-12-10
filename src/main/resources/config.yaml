@@ -1,0 +1,27 @@
+kumuluzee:
+  name: stream-service
+  env:
+    name: dev
+  version: 1.0.0
+  discovery:
+    etcd:
+      hosts: http://localhost:2379
+    ttl: 20
+    ping-interval: 15
+  health:
+    servlet:
+      mapping: /health
+      enabled: true
+    logs:
+      enabled: true
+      level: INFO
+      period-s: 30
+    checks:
+      disk-space-health-check:
+        threshold: 100000000
+  metrics:
+    web-instrumentation:
+      - name: metricsEndpoint
+        url-pattern: /metrics/*
+      - name: streamsEndpoint
+        url-pattern: /v1/streams/*

@@ -1,5 +1,9 @@
 package com.rso.stream;
 
+import org.eclipse.microprofile.metrics.annotation.Counted;
+import org.eclipse.microprofile.metrics.annotation.Gauge;
+import org.eclipse.microprofile.metrics.annotation.Timed;
+
 import java.util.ArrayList;
 import java.util.List;
 
