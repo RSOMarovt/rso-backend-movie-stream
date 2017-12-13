@@ -6,8 +6,7 @@ package com.rso.stream;
 public class Stream {
 
     private String id;
-    private String firstName;
-    private String lastName;
+    private String name;
 
     public String getId() {
         return id;
@@ -17,20 +16,13 @@ public class Stream {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
 }
