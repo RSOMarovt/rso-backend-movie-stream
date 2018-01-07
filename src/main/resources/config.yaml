@@ -1,7 +1,7 @@
 kumuluzee:
   name: stream-service
   env:
-    name: prod
+    name: dev
   version: 1.0.0
   discovery:
     etcd:
@@ -46,7 +46,3 @@ kumuluzee:
                           </Root>
                       </Loggers>
                   </Configuration>'
-
-config-properties:
-  mongoUrl: ec2-52-214-16-215.eu-west-1.compute.amazonaws.com
-  mongoDatabase: rso-streams
