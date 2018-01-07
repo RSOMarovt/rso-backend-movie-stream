@@ -21,11 +21,9 @@ public class Database {
 
 
     public static List<Stream> getActiveStreams() {
-        MongoClient mongoClient = MongoClientProvider.getInstance();
+        MongoClientProvider mcp = new MongoClientProvider();
 
-        MongoDatabase db = mongoClient.getDatabase("rso-streams");
-
-        MongoCollection collection = db.getCollection("Streams");
+        MongoCollection collection = mcp.getCollection("Streams");
 
         MongoCursor<Document> cursor = collection.find().iterator();
 
@@ -45,11 +43,9 @@ public class Database {
     }
 
     public Stream getActiveStream(String streamId) {
-        MongoClient mongoClient = MongoClientProvider.getInstance();
+        MongoClientProvider mcp = new MongoClientProvider();
 
-        MongoDatabase db = mongoClient.getDatabase("rso-streams");
-
-        MongoCollection collection = db.getCollection("Streams");
+        MongoCollection collection = mcp.getCollection("Streams");
 
         try {
             ObjectId objectId = new ObjectId(streamId);
@@ -67,11 +63,9 @@ public class Database {
     }
 
     public static String addActiveStream(Stream stream) {
-        MongoClient mongoClient = MongoClientProvider.getInstance();
+        MongoClientProvider mcp = new MongoClientProvider();
 
-        MongoDatabase db = mongoClient.getDatabase("rso-streams");
-
-        MongoCollection collection = db.getCollection("Streams");
+        MongoCollection collection = mcp.getCollection("Streams");
 
         Document doc = stream.createMongoElement();
 

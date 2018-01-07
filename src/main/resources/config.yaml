@@ -19,6 +19,8 @@ kumuluzee:
     checks:
       disk-space-health-check:
         threshold: 100000000
+      mongo-health-check:
+        connection-url: mongodb://ec2-52-214-16-215.eu-west-1.compute.amazonaws.com:27017/rso-streams?serverSelectionTimeoutMS=2000
   metrics:
     web-instrumentation:
       - name: metricsEndpoint
@@ -44,3 +46,7 @@ kumuluzee:
                           </Root>
                       </Loggers>
                   </Configuration>'
+
+config-properties:
+  mongoUrl: ec2-52-214-16-215.eu-west-1.compute.amazonaws.com
+  mongoDatabase: rso-streams

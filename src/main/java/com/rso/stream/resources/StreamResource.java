@@ -26,6 +26,7 @@ public class StreamResource {
     @GET
     @Gauge(name = "active_streams_length", unit = MetricUnits.NONE)
     public Response getAllStreams() {
+
         List<Stream> streams = Database.getActiveStreams();
         return Response.ok(streams).build();
     }
