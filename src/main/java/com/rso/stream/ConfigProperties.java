@@ -2,10 +2,13 @@ package com.rso.stream;
 
 import com.kumuluz.ee.configuration.cdi.ConfigBundle;
 
+import javax.enterprise.context.ApplicationScoped;
+
 /**
  * Created by urbanmarovt on 07/01/2018.
  */
 
+@ApplicationScoped
 @ConfigBundle("config-properties")
 public class ConfigProperties {
 

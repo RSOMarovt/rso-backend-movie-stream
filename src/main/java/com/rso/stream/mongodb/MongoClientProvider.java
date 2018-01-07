@@ -18,7 +18,7 @@ public class MongoClientProvider {
     }
     public MongoClient getInstance() {
         if(mongoClient == null) {
-            String mongoString = configProps.getMongoUrl();
+            String mongoString = "ec2-52-214-16-215.eu-west-1.compute.amazonaws.com";
             mongoClient = new MongoClient(mongoString);
         }
         return mongoClient;
@@ -28,7 +28,7 @@ public class MongoClientProvider {
 
         MongoClient mongoClient = this.getInstance();
 
-        MongoDatabase db = mongoClient.getDatabase(configProps.getMongoDatabase());
+        MongoDatabase db = mongoClient.getDatabase("rso-streams");
 
         return db.getCollection(collectionName);
     }
