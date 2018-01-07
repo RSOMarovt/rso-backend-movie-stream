@@ -19,6 +19,8 @@ spec:
             value: rso-umarovt
           - name: KUMULUZEE_DISCOVERY_ETCD_HOSTS
             value: http://etcd:2379
+          - name: ENV
+            value: prod
         ports:
         - containerPort: 8080
           name: server

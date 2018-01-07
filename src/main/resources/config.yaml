@@ -1,7 +1,7 @@
 kumuluzee:
   name: stream-service
   env:
-    name: dev
+    name: prod
   version: 1.0.0
   discovery:
     etcd:
@@ -31,7 +31,7 @@ kumuluzee:
     config-file: '<?xml version="1.0" encoding="UTF-8"?>
                   <Configuration name="streams">
                       <Appenders>
-                          <Socket name="logstash" host="33dfe9f2-72b2-4dc0-b002-608b144711e1-ls.logit.io" port="14286" protocol="tcp">
+                          <Socket name="logstash" host="1b343a4b-9fcf-48d4-a992-5e8a44323bff-ls.logit.io" port="14583" protocol="tcp">
                               <JSONLayout complete="false" compact="true" eventEol="true" charset="UTF-8" properties="true"/>
                           </Socket>
                       </Appenders>
