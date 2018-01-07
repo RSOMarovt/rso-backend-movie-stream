@@ -1,4 +1,4 @@
-package com.rso.stream;
+package com.rso.stream.health;
 
 
 import org.eclipse.microprofile.health.Health;

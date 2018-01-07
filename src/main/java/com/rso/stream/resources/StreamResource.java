@@ -1,5 +1,8 @@
-package com.rso.stream;
+package com.rso.stream.resources;
 
+import com.kumuluz.ee.logs.cdi.Log;
+import com.rso.stream.mongodb.Database;
+import com.rso.stream.models.Stream;
 import org.eclipse.microprofile.metrics.MetricUnits;
 import org.eclipse.microprofile.metrics.annotation.Gauge;
 import org.eclipse.microprofile.metrics.annotation.Timed;
@@ -16,20 +19,22 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @Path("streams")
+@Log
 @RequestScoped
 public class StreamResource {
 
     @GET
     @Gauge(name = "active_streams_length", unit = MetricUnits.NONE)
     public Response getAllStreams() {
-        List<Stream> customers = Database.getActiveStreams();
-        return Response.ok(customers).build();
+        List<Stream> streams = Database.getActiveStreams();
+        return Response.ok(streams).build();
     }
 
     @GET
     @Path("{streamId}")
     public Response getStream(@PathParam("streamId") String streamId) {
-        Stream customer = Database.getActiveStream(streamId);
+        Database database = new Database();
+        Stream customer = database.getActiveStream(streamId);
         return customer != null
                 ? Response.ok(customer).build()
                 : Response.status(Response.Status.NOT_FOUND).build();
@@ -38,15 +43,9 @@ public class StreamResource {
     @POST
     @Timed(name = "add_active_stream_timer")
     public Response addNewStream(Stream stream) {
-        Database.addActiveStream(stream);
-        return Response.noContent().build();
-    }
-
-    @DELETE
-    @Path("{streamId}")
-    @Timed(name = "delete_active_stream_timer")
-    public Response deleteStream(@PathParam("streamId") String streamId) {
-        Database.deleteActiveStream(streamId);
-        return Response.noContent().build();
+        String id = Database.addActiveStream(stream);
+        return id != null
+                ? Response.ok(id).build()
+                : Response.status(Response.Status.BAD_REQUEST).build();
     }
 }

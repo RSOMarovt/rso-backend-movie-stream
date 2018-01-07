@@ -1,14 +1,11 @@
-package com.rso.stream;
+package com.rso.stream.resources;
 
-import org.eclipse.microprofile.metrics.MetricUnits;
-import org.eclipse.microprofile.metrics.annotation.Gauge;
-import org.eclipse.microprofile.metrics.annotation.Timed;
+import com.rso.stream.health.CustomHealthCheckService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 /**
  * Created by urbanmarovt on 13/11/2017.

@@ -25,3 +25,22 @@ kumuluzee:
         url-pattern: /metrics/*
       - name: streamsEndpoint
         url-pattern: /v1/streams/*
+  logs:
+    config-file: '<?xml version="1.0" encoding="UTF-8"?>
+                  <Configuration name="streams">
+                      <Appenders>
+                          <Socket name="logstash" host="33dfe9f2-72b2-4dc0-b002-608b144711e1-ls.logit.io" port="14286" protocol="tcp">
+                              <JSONLayout complete="false" compact="true" eventEol="true" charset="UTF-8" properties="true"/>
+                          </Socket>
+                      </Appenders>
+                      <Loggers>
+                          <!-- Resources (REST) -->
+                          <Logger name="com.rso.stream.resources.StreamResource" level="trace" additivity="false">
+                              <AppenderRef ref="logstash"/>
+                          </Logger>
+
+                          <Root level="all">
+                              <AppenderRef ref="console" level="info"/>
+                          </Root>
+                      </Loggers>
+                  </Configuration>'

@@ -1,4 +1,4 @@
-package com.rso.stream;
+package com.rso.stream.health;
 
 
 import org.eclipse.microprofile.health.Health;
@@ -6,8 +6,6 @@ import org.eclipse.microprofile.health.HealthCheck;
 import org.eclipse.microprofile.health.HealthCheckResponse;
 
 import javax.enterprise.context.ApplicationScoped;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.logging.Logger;
 
 /**

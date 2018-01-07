@@ -1,4 +1,4 @@
-package com.rso.stream;
+package com.rso.stream.websockets;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -12,21 +12,21 @@ import java.util.Map;
  * Created by urbanmarovt on 12/11/2017.
  */
 
-@ServerEndpoint("/v1/movies/{idMovie}")
+@ServerEndpoint("/v1/streamMessaging/{streamId}")
 public class MovieEndpoint {
 
     @OnOpen
-    public void onConnectionOpen(final Session session, @PathParam("idMovie") final int idMovie) {
+    public void onConnectionOpen(final Session session, @PathParam("streamId") final String streamId) {
 
         System.out.println("Session opened");
-        System.out.println(Integer.toString(idMovie));
+        System.out.println(streamId);
     }
 
     @OnMessage
     public String broadcastMessage(String message) {
         System.out.println("Someone send message!!!");
 
-        return "Aloha1";
+        return message;
     }
 
     @OnClose
