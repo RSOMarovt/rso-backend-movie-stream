@@ -1,7 +1,7 @@
 kumuluzee:
   name: stream-service
   env:
-    name: dev
+    name: prod
   version: 1.0.0
   discovery:
     etcd:
